@@ -1,0 +1,12 @@
+{
+    "fields": {
+      "Nom": "Dupont",
+      "Prénom": "Jean",
+      "Enseigne": "Paul",
+      "Email": "jean.dupont@exemple.com",
+      "Téléphone": "(075) 896-3623",
+      "Addresse": "110 avenue du general de gaulle",
+      "Code postal": 37000,
+      "Catégorie de commerce": "Alimentation"
+    }
+}
