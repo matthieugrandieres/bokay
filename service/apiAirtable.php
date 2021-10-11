@@ -8,6 +8,7 @@ class apiAirtable{
     private $_response;
     private $_datasFormat;
 
+    
     public function __construct($datas, $url){
         $this->_datas = $datas;
         $this->_url = $url;
@@ -23,19 +24,20 @@ class apiAirtable{
 
     public function datasFormatJson(){
         $this->_datasFormat = array("fields" => array(
-            "Nom" => "Dubost",
-            "Prénom" => "Jean",
-            "Enseigne" => "Paul",
-            "Email" => "jean.dupont@exemple.com",
-            "Téléphone" => "0765895623",
-            "Code postal" => 37000,
-            "Catégorie de commerce" => "Alimentation"
+            "Nom" => $this->_datas->getNom(),
+            "Prénom" => $this->_datas->getPrenom(),
+            "Enseigne" => $this->_datas->getEnseigne(),
+            "Email" => $this->_datas->getEmail(),
+            "Téléphone" => $this->_datas->getTelephone(),
+            "Adresse" => $this->_datas->getAdresse(),
+            "Code postal" => $this->_datas->getCodePostal(),
+            "Catégorie de commerce" => $this->_datas->getCategorieCommerce()
         ));
 
         $this->_datasFormat = json_encode($this->_datasFormat);
     }
 
-    public function curlPost(){
+    public function curlPost($location){
         $this->_ch = curl_init();
         curl_setopt($this->_ch, CURLOPT_URL, $this->_url);
         curl_setopt($this->_ch, CURLOPT_POST, true);
@@ -47,8 +49,16 @@ class apiAirtable{
 
         $this->_response = curl_exec($this->_ch);
 
-
-
+        if (curl_getinfo($this->_ch, CURLINFO_HTTP_CODE) == 200) {
+            session_start();
+            $_SESSION['validate'] = "Vos informations ont bien étés transmise";
+            header("location:" . $location);
+            exit;
+        } else {
+            $error = "Un problème est survenu";
+            header("location:" . $location);
+            exit;
+        }
 
     }
     

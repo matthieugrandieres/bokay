@@ -63,5 +63,37 @@ class Commercant{
         return $this->_nom;
     }
 
+    public function getPrenom(){
+        return $this->_prenom;
+    }
+
+    public function getEnseigne(){
+        return $this->_enseigne;
+    }
+
+    public function getEmail(){
+        return $this->_email;
+    }
+
+    public function getTelephone(){
+        return intval($this->_telephone);
+    }
+
+    public function getAdresse(){
+        return $this->_adresse;
+    }
+
+    public function getCodePostal(){
+        return intval($this->_code_postal);
+    }
+
+    public function getVille(){
+        return $this->_ville;
+    }
+
+    public function getCategorieCommerce(){
+        return $this->_categorie_commerce;
+    }
+
     
 }
