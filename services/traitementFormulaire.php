@@ -26,4 +26,18 @@ class traitementFormulaire {
             return true;
         }
     }
+
+    public static function messageFlashError($message, $location){
+        session_start();
+        $_SESSION['error'] = $message;
+        header('Location:' . $location);
+        exit;
+    }
+
+    public static function messageFlashValidation($message, $location){
+        session_start();
+        $_SESSION['validate'] = $message;
+        header('Location:' . $location);
+        exit;
+    }
 }

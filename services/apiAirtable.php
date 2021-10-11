@@ -31,13 +31,14 @@ class apiAirtable{
             "Téléphone" => $this->_datas->getTelephone(),
             "Adresse" => $this->_datas->getAdresse(),
             "Code postal" => $this->_datas->getCodePostal(),
+            "Ville" => $this->_datas->getVille(),
             "Catégorie de commerce" => $this->_datas->getCategorieCommerce()
         ));
 
         $this->_datasFormat = json_encode($this->_datasFormat);
     }
 
-    public function curlPost($location){
+    public function curlPost(){
         $this->_ch = curl_init();
         curl_setopt($this->_ch, CURLOPT_URL, $this->_url);
         curl_setopt($this->_ch, CURLOPT_POST, true);
@@ -50,14 +51,9 @@ class apiAirtable{
         $this->_response = curl_exec($this->_ch);
 
         if (curl_getinfo($this->_ch, CURLINFO_HTTP_CODE) == 200) {
-            session_start();
-            $_SESSION['validate'] = "Vos informations ont bien étés transmise";
-            header("location:" . $location);
-            exit;
+            traitementFormulaire::messageFlashValidation("Vos informations ont bien étés transmises", "page-commercant");
         } else {
-            $error = "Un problème est survenu";
-            header("location:" . $location);
-            exit;
+            traitementFormulaire::messageFlashError("Une erreur est survenue, merci de recommencer la saisie", "page-commercant");
         }
 
     }

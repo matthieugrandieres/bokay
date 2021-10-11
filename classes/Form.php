@@ -33,7 +33,7 @@ HTML;
     public static function createSubmitForm($label){
         echo '
         <div class="button-submit mt-4 d-flex justify-content-center">
-            <input class="btn btn-primary" type="submit" value="'. $label . '">
+            <input class="btn btn-primary mb-4" type="submit" value="'. $label . '">
         </div>';
 
     }

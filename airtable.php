@@ -6,10 +6,10 @@ Author: Matthieu GRANDIERES
 Version: 1.0.0
 */
 define( 'AIRTABLE__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-require_once( AIRTABLE__PLUGIN_DIR . 'class/Commercant.php' );
-require_once( AIRTABLE__PLUGIN_DIR . 'class/Form.php' );
-require_once( AIRTABLE__PLUGIN_DIR . 'service/apiAirtable.php' );
-require_once( AIRTABLE__PLUGIN_DIR . 'service/traitementFormulaire.php' );
+require_once( AIRTABLE__PLUGIN_DIR . 'classes/Commercant.php' );
+require_once( AIRTABLE__PLUGIN_DIR . 'classes/Form.php' );
+require_once( AIRTABLE__PLUGIN_DIR . 'services/apiAirtable.php' );
+require_once( AIRTABLE__PLUGIN_DIR . 'services/traitementFormulaire.php' );
 
 function createCommercant(){
     $commercant = new Commercant("GRANDIERES", "Matthieu", "Enseigne", "Email", "Telephone", "Adresse", "Code Postal", "Paris", "Catégorie");
@@ -64,7 +64,6 @@ function sendCommercant(){
                     traitementFormulaire::validationDatas($_POST['categorie_commerce'])
                 );
 
-                var_dump($commercant);
                 /**
                  * API Airtable
                  */
@@ -73,24 +72,15 @@ function sendCommercant(){
                 $request->curlPost("page-commercant");
 
             } else {
-                echo "ERROR TYPE";
+                traitementFormulaire::messageFlashError("Une erreur est survenu, problème de type de champs", "page-commercant");
             }
 
         } else {
-            echo 'ERROR LONGUEUR';
-            var_dump($_POST['nom']);
-            var_dump($_POST['prenom']);
-            var_dump($_POST['enseigne']);
-            var_dump($_POST['email']);
-            var_dump($_POST['telephone']);
-            var_dump($_POST['adresse']);
-            var_dump($_POST['code_postal']);
-            var_dump($_POST['ville']);
-            var_dump($_POST['categorie_commerce']);
+            traitementFormulaire::messageFlashError("Une erreur est survenue, un ou plusieurs champs sont trop court ou trop long", "page-commercant");
         }
 
     } else {
-    echo 'ERROR CHAMPS VIDE';
+        traitementFormulaire::messageFlashError("Une erreur est survenue, un ou plusieurs champs sont vides", "page-commercant");
     }
 
 }
