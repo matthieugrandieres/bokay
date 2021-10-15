@@ -13,14 +13,14 @@ require_once( AIRTABLE__PLUGIN_DIR . 'services/traitementFormulaire.php' );
 
 function createCommercant(){
     $commercant = new Commercant("GRANDIERES", "Matthieu", "Enseigne", "Email", "Telephone", "Adresse", "Code Postal", "Paris", "Catégorie");
-    Form::createTextForm("nom", "Nom");
-    Form::createTextForm("prenom", "Prenom");
-    Form::createTextForm("enseigne", "Enseigne");
-    Form::createTextForm("email", "Email");
-    Form::createNumberForm("telephone", "Telephone");
-    Form::createTextForm("adresse", "Adresse");
-    Form::createNumberForm("code_postal", "Code Postal");
-    Form::createTextForm("ville", "Ville");
+    Form::createTextForm("nom", "Nom", "nom");
+    Form::createTextForm("prenom", "Prenom", "prenom");
+    Form::createTextForm("enseigne", "Enseigne", "enseigne");
+    Form::createTextForm("email", "Email", "email");
+    Form::createNumberForm("telephone", "Telephone", "telephone");
+    Form::createTextForm("adresse", "Adresse", "adresse");
+    Form::createTextForm("code_postal", "Code Postal", "code_postal");
+    Form::createTextForm("ville", "Ville", "ville");
     Form::createSelectForm("categorie_commerce", "Catégorie de commerce", "Choisir une catégorie");
     Form::createSubmitForm("S'inscrire");
     

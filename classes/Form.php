@@ -2,17 +2,17 @@
 
 class Form{
 
-    public static function createTextForm($el, $label){
+    public static function createTextForm($el, $label, $id){
         echo <<<HTML
-        <label for="formGroupExampleInput">$label</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" name=$el>   
+        <label>$label</label>
+        <input type="text" class="form-control" id=$id name=$el>   
 HTML;
     }
 
-    public static function createNumberForm($el, $label){
+    public static function createNumberForm($el, $label, $id){
         echo <<<HTML
-        <label for="formGroupExampleInput">$label</label>
-        <input type="number" class="form-control" id="formGroupExampleInput" name=$el>   
+        <label>$label</label>
+        <input type="number" class="form-control" id=$id name=$el>   
 HTML;
     }
 
