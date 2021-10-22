@@ -7,6 +7,7 @@ Version: 1.0.0
 */
 define( 'AIRTABLE__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 require_once( AIRTABLE__PLUGIN_DIR . 'classes/Commercant.php' );
+require_once( AIRTABLE__PLUGIN_DIR . 'classes/Livreur.php' );
 require_once( AIRTABLE__PLUGIN_DIR . 'classes/Form.php' );
 require_once( AIRTABLE__PLUGIN_DIR . 'services/apiAirtable.php' );
 require_once( AIRTABLE__PLUGIN_DIR . 'services/traitementFormulaire.php' );
@@ -131,30 +132,30 @@ function sendDatasLivreur(){
             /**
              * Vérification type des champs
              */
-            if (is_string($_POST['nom']) && is_string($_POST['prenom']) && is_string($_POST['email']) && is_numeric($_POST['telephone']) && is_string($_POST['telephone']) && 
-            is_string($_POST['adresse']) && is_numeric($_POST['code_postal']) && is_string($_POST['ville']) && is_string($_POST['categorie_commerce'])) {
+            if (is_string($_POST['nom']) && is_string($_POST['prenom']) && is_string($_POST['email']) && is_numeric($_POST['telephone']) && is_string($_POST['type_vehicule']) && 
+            is_string($_POST['secteur_geographique']) && is_string($_POST['ville']) && is_numeric($_POST['code_postal']) && is_string($_POST['rayon_km'])) {
 
                 /**
                  * Création d'un commerçant 
                  */
-                $commercant = new Commercant(
+                $livreur = new Livreur(
                     traitementFormulaire::validationDatas($_POST['nom']),
                     traitementFormulaire::validationDatas($_POST['prenom']),
-                    traitementFormulaire::validationDatas($_POST['enseigne']),
                     traitementFormulaire::validationDatas($_POST['email']),
                     traitementFormulaire::validationDatas($_POST['telephone']),
-                    traitementFormulaire::validationDatas($_POST['adresse']),
-                    traitementFormulaire::validationDatas($_POST['code_postal']),
+                    traitementFormulaire::validationDatas($_POST['type_vehicule']),
+                    traitementFormulaire::validationDatas($_POST['secteur_geographique']),
                     traitementFormulaire::validationDatas($_POST['ville']),
-                    traitementFormulaire::validationDatas($_POST['categorie_commerce'])
+                    traitementFormulaire::validationDatas($_POST['code_postal']),
+                    traitementFormulaire::validationDatas($_POST['rayon_km'])
                 );
 
                 /**
                  * API Airtable
                  */
-                $request = new apiAirtable($commercant, "https://api.airtable.com/v0/appBTp6tfN7x9ak16/Commer%C3%A7ants");
-                $request->datasFormatJson();
-                $request->curlPost("page-commercant");
+                $request = new apiAirtable($livreur, "https://api.airtable.com/v0/appBTp6tfN7x9ak16/LIvreurs");
+                $request->datasFormatJsonLivreur();
+                $request->curlPost(get_home_url() . "/page-livreur.php");
 
             } else {
                 traitementFormulaire::messageFlashError("Une erreur est survenu, problème de type de champs", "page-commercant");
