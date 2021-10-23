@@ -43,7 +43,7 @@ class Livreur{
 
     public function getTelephone()
     {
-        return $this->_telephone;
+        return intval($this->_telephone);
     }
 
     public function getVehicule()
@@ -61,8 +61,14 @@ class Livreur{
         return $this->_ville;
     }
 
+    public function getCodePostal()
+    {
+        return intval($this->_codePostal);
+    }
+
     public function getRayon()
     {
         return $this->_rayon;
     }
+
 }

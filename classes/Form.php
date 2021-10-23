@@ -23,7 +23,7 @@ HTML;
             ?>
             <?php 
             for ($i = 0; $i < count($values); $i++){
-                echo '<option value=' . $values[$i] . '>' . $values[$i] . '</option>';
+                echo '<option value="' . $values[$i] . '">' . $values[$i] . '</option>';
             }?>
         </select><?php
     }

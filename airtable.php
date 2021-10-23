@@ -22,7 +22,7 @@ function createCommercant(){
     Form::createTextForm("email", "Email", "email");
     Form::createNumberForm("telephone", "Telephone", "telephone");
     Form::createTextForm("adresse", "Adresse", "adresse");
-    Form::createTextForm("code_postal", "Code Postal", "code_postal");
+    Form::createNumberForm("code_postal", "Code Postal", "code_postal");
     Form::createTextForm("ville", "Ville", "ville");
     Form::createSelectForm("categorie_commerce", "Catégorie de commerce", array('Alimentation', 'High Tech', 'Higiène', 'Santé et bien être', 'Autre'));
     Form::createSubmitForm("S'inscrire");
@@ -52,7 +52,8 @@ function sendDatasCommercant(){
             /**
              * Vérification type des champs
              */
-            if (is_string($_POST['nom']) && is_string($_POST['prenom']) && is_string($_POST['enseigne']) && is_string($_POST['email']) && is_numeric($_POST['telephone']) && 
+            if (is_string($_POST['nom']) && is_string($_POST['prenom']) && is_string($_POST['enseigne']) && is_string($_POST['email']) && 
+            filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) && is_numeric($_POST['telephone']) && 
             is_string($_POST['adresse']) && is_numeric($_POST['code_postal']) && is_string($_POST['ville']) && is_string($_POST['categorie_commerce'])) {
 
                 /**
@@ -78,7 +79,7 @@ function sendDatasCommercant(){
                 $request->curlPost("page-commercant");
 
             } else {
-                traitementFormulaire::messageFlashError("Une erreur est survenu, problème de type de champs", "page-commercant");
+                traitementFormulaire::messageFlashError("Une erreur est survenu, problème de type de champs ou de formatage de l'email", "page-commercant");
             }
 
         } else {
@@ -100,7 +101,7 @@ function createFormLivreur(){
     Form::createTextForm("email", "Email", "email");
     Form::createNumberForm("telephone", "Telephone", "telephone");
     Form::createSelectForm("type_vehicule", "Type de véhicule", array('Vélo', 'Scooter', 'Voiture'));
-    Form::createSelectForm("secteur_geographique", "Secteur géographique", array('Ile de France', 'Normandie', 'Centre Val de Loire', 'Guadeloupe', 'Martinique', 'Guyanne'));
+    Form::createSelectForm("secteur_geographique", "Secteur géographique", array("Ile de France", 'Normandie', 'Centre Val de Loire', 'Guadeloupe', 'Martinique', 'Guyanne'));
     echo "<label class='pt-2'>Ville où vous souhaitez travailler</label>";
     Form::createTextForm("ville", "Ville", "ville");
     Form::createTextForm("code_postal", "Code Postal", "code_postal");
@@ -124,7 +125,7 @@ function sendDatasLivreur(){
          */    
         if (traitementFormulaire::lenghtField(3, 20, $_POST['nom']) && traitementFormulaire::lenghtField(3, 20, $_POST['prenom']) &&
             traitementFormulaire::lenghtField(3, 50, $_POST['email']) && traitementFormulaire::lenghtField(10, 15, $_POST['telephone']) && 
-            traitementFormulaire::lenghtField(5, 20, $_POST['type_vehicule']) && traitementFormulaire::lenghtField(5, 20, $_POST['secteur_geographique']) && 
+            traitementFormulaire::lenghtField(4, 20, $_POST['type_vehicule']) && traitementFormulaire::lenghtField(5, 20, $_POST['secteur_geographique']) && 
             traitementFormulaire::lenghtField(3, 50, $_POST['ville']) && traitementFormulaire::lenghtField(5, 6, $_POST['code_postal']) && 
             traitementFormulaire::lenghtField(3, 20, $_POST['rayon_km'])) {
 
@@ -155,17 +156,17 @@ function sendDatasLivreur(){
                  */
                 $request = new apiAirtable($livreur, "https://api.airtable.com/v0/appBTp6tfN7x9ak16/LIvreurs");
                 $request->datasFormatJsonLivreur();
-                $request->curlPost(get_home_url() . "/page-livreur.php");
+                $request->curlPost(get_home_url() . "/livreur");
 
             } else {
-                traitementFormulaire::messageFlashError("Une erreur est survenu, problème de type de champs", "page-commercant");
+                traitementFormulaire::messageFlashError("Une erreur est survenu, problème de type de champs", get_home_url() . "/livreur");
             }
 
         } else {
-            traitementFormulaire::messageFlashError("Une erreur est survenue, un ou plusieurs champs sont trop court ou trop long", "page-commercant");
+            traitementFormulaire::messageFlashError("Une erreur est survenue, un ou plusieurs champs sont trop court ou trop long", get_home_url() . "/livreur");
         }
 
     } else {
-        traitementFormulaire::messageFlashError("Une erreur est survenue, un ou plusieurs champs sont vides", "page-commercant");
+        traitementFormulaire::messageFlashError("Une erreur est survenue, un ou plusieurs champs sont vides", get_home_url() . "/livreur");
     }
 }
