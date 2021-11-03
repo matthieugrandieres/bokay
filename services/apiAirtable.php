@@ -14,14 +14,6 @@ class apiAirtable{
         $this->_url = $url;
     }
 
-    public function getDatas(){
-        return $this->_datas;
-    }
-
-    public function getDatasFormat(){
-        return $this->_datasFormat;
-    }
-
     public function datasFormatJson(){
         $this->_datasFormat = array("fields" => array(
             "Nom" => $this->_datas->getNom(),
@@ -59,10 +51,7 @@ class apiAirtable{
         curl_setopt($this->_ch, CURLOPT_URL, $this->_url);
         curl_setopt($this->_ch, CURLOPT_POST, true);
         curl_setopt($this->_ch, CURLOPT_POSTFIELDS, $this->_datasFormat);
-        curl_setopt($this->_ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer keyHbHQA7eqhOvZVB",
-            "content-type:application/json"
-        ));
+        curl_setopt($this->_ch, CURLOPT_HTTPHEADER, APIHEADER);
 
         $this->_response = curl_exec($this->_ch);
 

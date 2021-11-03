@@ -2,49 +2,14 @@
 
 class Commercant{
     
-    /**
-     * @var string
-     */
     private $_nom;
-
-    /**
-     * @var string
-     */
     private $_prenom;
-
-    /**
-     * @var string
-     */
     private $_enseigne;
-
-    /**
-     * @var string
-     */
     private $_email;
-
-    /**
-     * @var integer
-     */
     private $_telephone;
-
-    /**
-     * @var string
-     */
     private $_adresse;
-
-    /**
-     * @var integer
-     */
     private $_code_postal;
-
-    /**
-     * @var string
-     */
     private $_ville;
-
-    /**
-     * @var array
-     */
     private $_categorie_commerce;
 
     public function __construct($nom, $prenom, $enseigne, $email, $telephone, $adresse, $code_postal, $ville, $categorie_commerce){
@@ -59,39 +24,39 @@ class Commercant{
         $this->_categorie_commerce = $categorie_commerce;
     }
 
-    public function getNom(){
+    public function getNom(): string{
         return $this->_nom;
     }
 
-    public function getPrenom(){
+    public function getPrenom(): string{
         return $this->_prenom;
     }
 
-    public function getEnseigne(){
+    public function getEnseigne(): string{
         return $this->_enseigne;
     }
 
-    public function getEmail(){
+    public function getEmail(): string{
         return $this->_email;
     }
 
-    public function getTelephone(){
+    public function getTelephone(): int{
         return intval($this->_telephone);
     }
 
-    public function getAdresse(){
+    public function getAdresse(): string{
         return $this->_adresse;
     }
 
-    public function getCodePostal(){
+    public function getCodePostal(): int{
         return intval($this->_code_postal);
     }
 
-    public function getVille(){
+    public function getVille(): string{
         return $this->_ville;
     }
 
-    public function getCategorieCommerce(){
+    public function getCategorieCommerce(): string{
         return $this->_categorie_commerce;
     }
 

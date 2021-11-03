@@ -170,3 +170,18 @@ function sendDatasLivreur(){
         traitementFormulaire::messageFlashError("Une erreur est survenue, un ou plusieurs champs sont vides", get_home_url() . "/livreur");
     }
 }
+
+/**
+ * Partenaires
+ */
+function createFormPartenaires(){
+    Form::createTextForm("nom", "Nom", "nom");
+    Form::createTextForm("prenom", "Prenom", "prenom");
+    Form::createTextForm("collectivite", "Nom de collectivité (mairie, région..) ou association", "collectivite");
+    Form::createTextForm("email", "Email", "email");
+    Form::createNumberForm("telephone", "Telephone", "telephone");
+    Form::createTextForm("objet", "Objet", "objet");
+    Form::createTextAreaForm("message", "Message", "message");
+    Form::createSubmitForm("S'inscrire");
+    
+}

@@ -19,7 +19,7 @@ class traitementFormulaire {
         return $data;
     }
 
-    public static function lenghtField($min, $max, $field){
+    public static function lenghtField($min, $max, $field): bool{
         if (strlen($field) < $min || strlen($field) > $max){
             return false;
         } else {

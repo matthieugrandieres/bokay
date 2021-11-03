@@ -16,6 +16,13 @@ HTML;
 HTML;
     }
 
+    public static function createTextAreaForm($el, $label, $id){
+        echo <<<HTML
+        <label>$label</label>
+        <textarea type="number" class="form-control" id=$id name=$el></textarea>   
+HTML;
+    }
+
     public static function createSelectForm($el, $label, $values){
 
         echo '<label for="formGroupExampleInput">' . $label . '</label>' . 
