@@ -4,6 +4,8 @@
 
 Ma mission sur ce projet a été de créer la maquette graphique, l'intégrer et de développer les fonctionnalités demandés, l'enjeu principal était de récuperer les données des utilisateurs et de les stocker dans un tableur via une API avant le lancement du market place. Vous pouvez avoir accès au code du plugin ci-joint. 
 
+👥 Equipe : Seul avec un développeur de l'entreprise sur qui je pouvais m'appuyer en cas de point bloquant
+
 **Technologies :**
 
 - Draw.IO
